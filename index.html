@@ -76,6 +76,11 @@
   /* Prices */
   .prices { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
   .price { background: var(--paper); border: 1px solid var(--line); border-radius: 16px; padding: 24px; text-align: center; }
+  a.price, a.bundle { display: block; color: inherit; text-decoration: none; cursor: pointer; transition: transform .15s, box-shadow .15s; }
+  a.bundle { display: grid; }
+  a.price:hover, a.bundle:hover, a.price:focus-visible, a.bundle:focus-visible { transform: translateY(-3px); box-shadow: 0 8px 22px rgba(59,42,32,.12); }
+  .price .go, .bundle .go { display: inline-block; margin-top: 12px; color: var(--red); font-weight: 600; font-size: .95rem; }
+  .bundle .go { grid-column: 1 / -1; justify-self: center; margin-top: 0; }
   .price.hl { border: 2px solid var(--gold); position: relative; }
   .price.hl::before { content: "Populair"; position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: var(--gold); font-size: .8rem; font-weight: 600; padding: 2px 12px; border-radius: 999px; }
   .price .amt { font-family: Fraunces, Georgia, serif; font-size: 2.2rem; font-weight: 800; color: var(--red); }
@@ -184,6 +189,11 @@
   .en-cta { text-align: center; margin: 28px 0 0; }
   .en-cta small { display: block; color: var(--muted); margin-top: 12px; font-size: .85rem; }
   @media (max-width: 700px) { .en { padding: 24px 16px; } .en-grid { grid-template-columns: 1fr; } .en .ex { transform: none; } }
+  /* Taalkeuze NL / EN */
+  .lang { position: absolute; top: 14px; right: 16px; z-index: 2; display: flex; background: rgba(0,0,0,.18); border-radius: 999px; padding: 3px; }
+  .lang a { color: #fff; text-decoration: none; font-size: .85rem; font-weight: 600; padding: 4px 12px; border-radius: 999px; }
+  .lang a[aria-current] { background: #fff; color: var(--red); }
+  @media (max-width: 600px) { .hero { padding-top: 66px; } }
 </style>
 <script>
   // Na 15 november (Nederlandse tijd) automatisch terug naar de gewone prijzen.
@@ -241,6 +251,7 @@
 
 <header class="hero">
   <div class="rain" aria-hidden="true"></div>
+  <nav class="lang" aria-label="Taal"><a href="./" aria-current="page">🇳🇱 NL</a><a href="en.html" lang="en">🇬🇧 EN</a></nav>
   <div class="wrap">
     <div class="eb eb-banner">🎉 Vroege Piet: <b>25% korting</b> t/m 15 november</div>
     <div class="brand">🎁 Rijm<span>piet</span></div>
@@ -259,7 +270,7 @@
       <li>✔️ Vanaf <span class="eb">€4,50</span><span class="full">€6</span></li>
       <li>✔️ Eén keer gratis aanpassen</li>
     </ul>
-    <a class="en-link" href="#english" lang="en">🇬🇧 Saint Nicholas poems in English →</a>
+    <a class="en-link" href="en.html" lang="en">🇬🇧 Saint Nicholas poems in English →</a>
   </div>
 </header>
 
@@ -295,12 +306,12 @@
     <h2>Prijzen</h2>
     <p class="sub">Geen verrassingen, behalve in de surprise.<span class="eb"><br><b>Vroege Piet: 25% korting op elk los gedicht én een gratis printversie als je bestelt t/m 15 november.</b></span></p>
     <div class="prices">
-      <div class="price"><h3>Kort</h3><div class="amt"><span class="eb"><s>€6</s> €4,50</span><span class="full">€6</span></div><p>±16 regels<br>Perfect voor een klein cadeau</p></div>
-      <div class="price hl"><h3>Lang</h3><div class="amt"><span class="eb"><s>€9</s> €6,75</span><span class="full">€9</span></div><p>30+ regels<br>Voor een echte surprise</p></div>
-      <div class="price"><h3>Spoed</h3><div class="amt">+€2,50</div><p>Binnen 12 uur geleverd<br>Voor de last-minute shoppers</p></div>
-      <div class="price"><h3>Printversie</h3><div class="amt"><span class="eb"><s>+€1</s> Gratis</span><span class="full">+€1</span></div><p>Mooie PDF om te printen en op je surprise te plakken<br><span class="eb">Gratis t/m 15 november</span><span class="full">+€1,50 bij een lang gedicht</span></p></div>
+      <a class="price" href="https://tally.so/r/b5BW4L"><h3>Kort</h3><div class="amt"><span class="eb"><s>€6</s> €4,50</span><span class="full">€6</span></div><p>±16 regels<br>Perfect voor een klein cadeau</p><span class="go">Bestellen →</span></a>
+      <a class="price hl" href="https://tally.so/r/b5BW4L"><h3>Lang</h3><div class="amt"><span class="eb"><s>€9</s> €6,75</span><span class="full">€9</span></div><p>30+ regels<br>Voor een echte surprise</p><span class="go">Bestellen →</span></a>
+      <a class="price" href="https://tally.so/r/b5BW4L"><h3>Spoed</h3><div class="amt">+€2,50</div><p>Binnen 12 uur geleverd<br>Voor de last-minute shoppers</p><span class="go">Bestellen →</span></a>
+      <a class="price" href="https://tally.so/r/b5BW4L"><h3>Printversie</h3><div class="amt"><span class="eb"><s>+€1</s> Gratis</span><span class="full">+€1</span></div><p>Mooie PDF om te printen en op je surprise te plakken<br><span class="eb">Gratis t/m 15 november</span><span class="full">+€1,50 bij een lang gedicht</span></p><span class="go">Bestellen →</span></a>
     </div>
-    <div class="bundle">
+    <a class="bundle" href="https://tally.so/r/b5BW4L">
       <div class="bundle-head">
         <span class="bundle-tag">Lootjespakket</span>
         <h3>5 gedichten, voordeliger samen</h3>
@@ -310,7 +321,8 @@
         <div><b>5 × Kort</b><span class="amt"><s>€30</s> €25</span><small>€5 per gedicht, printversies inbegrepen</small></div>
         <div><b>5 × Lang</b><span class="amt"><s>€45</s> €37,50</span><small>€7,50 per gedicht, printversies inbegrepen</small></div>
       </div>
-    </div>
+      <span class="go">Bestel je Lootjespakket →</span>
+    </a>
   </section>
 
   <section>
@@ -341,36 +353,6 @@
     <p class="ex-note">📄 Wil je het gedicht ook als mooie printversie (PDF), klaar om op je surprise te plakken? <span class="eb">Bestel je t/m 15 november, dan krijg je die gratis.</span><span class="full">Dat kost €1 extra (lang gedicht €1,50).</span></p>
   </section>
 
-  <section id="english" lang="en">
-    <div class="en">
-      <h2>Saint Nicholas poems in English</h2>
-      <p class="sub">New to the Netherlands, or celebrating with friends who don't speak Dutch? Rijmpiet writes your poem in English.</p>
-      <div class="en-grid">
-        <div>
-          <h3>What's the tradition?</h3>
-          <p>On 5 December, Dutch families, friends and colleagues swap gifts "from Saint Nicholas" (Sinterklaas in Dutch). Each gift comes with a rhyming poem that gently teases the person who gets it, about their habits, hobbies or funny moments from this year. They read it out loud before unwrapping, and the laughs are half the fun. Poems are signed by Saint Nicholas and Piet, not by you.</p>
-          <h3>How it works</h3>
-          <ul>
-            <li>Fill in the English order form. It takes about 3 minutes.</li>
-            <li>Pay straight after you order, with iDEAL or PayPal (credit card works too).</li>
-            <li>Get your poem within 24 hours (rush: 12 hours) by email, plus a printable PDF if you like (free until 15 November, then €1 / €1.50).</li>
-          </ul>
-          <h3>Prices</h3>
-          <p>The same as Dutch poems: short (about 16 lines) <span class="eb"><b>€4.50</b>, long (30+ lines) <b>€6.75</b> with 25% early-bird discount and a free printable PDF until 15 November</span><span class="full"><b>€6</b>, long (30+ lines) <b>€9</b></span>. Rush +€2.50. One free change per poem.</p>
-        </div>
-        <article class="ex">
-          <div class="ex-meta"><span class="chip">Friend</span><span class="chip">Teasing 😏</span></div>
-          <h3>For Sarah, who cycles in every weather</h3>
-          <p class="lines"><span>Saint Nicholas opened his big book today</span><span>and read about Sarah, who moved here in May.</span><span>She cycles to work through the wind and the rain,</span><span>and swears every morning she'll switch to the train.</span><span>She orders "een koffie" with confident flair,</span><span>then flees into English the moment they stare.</span><span>Her toast gets its hagelslag, true Dutch routine,</span><span>the sprinkliest expat that Piet's ever seen.</span><span>So Sarah, unwrap it and try it out soon:</span><span>a raincoat for cycling through every monsoon!</span><span>Saint Nicholas and Piet</span></p>
-        </article>
-      </div>
-      <div class="en-cta">
-        <a class="btn" href="https://tally.so/r/q4xp7O">Order your poem →</a>
-        <small>The order form is fully in English. Your answers are only used to write your poem and are deleted after 5 December; see the <a href="#privacy">privacy statement</a> (in Dutch) or email us with any question.</small>
-      </div>
-    </div>
-  </section>
-
   <section>
     <h2>Veelgestelde vragen</h2>
     <details class="eb"><summary>Hoe werkt de Vroege Piet-korting?</summary><p>Bestel je gedicht uiterlijk 15 november en je krijgt 25% korting op elk los gedicht, plus de printversie gratis. Het Lootjespakket is al voordeliger, dus daar telt de korting niet extra. Je kiest zelf wanneer je het gedicht wilt ontvangen, dus het mag ook pas eind november.</p></details>
@@ -378,7 +360,7 @@
     <details><summary>Hoe snel krijg ik mijn gedicht?</summary><p>Binnen 24 uur na betaling. Met spoed binnen 12 uur.</p></details>
     <details><summary>Wat als ik het gedicht niet leuk vind?</summary><p>Je mag één keer gratis een aanpassing vragen. Zeg gewoon wat er anders moet.</p></details>
     <details><summary>Hoeveel moet ik vertellen?</summary><p>Hoe meer details, hoe leuker het gedicht. Denk aan hobby's, werk, gewoontes en grappige momenten van dit jaar.</p></details>
-    <details><summary>Kan het gedicht ook in het Engels?</summary><p>Ja! Handig voor collega's, vrienden of familie die (nog) geen Nederlands spreken. Gebruik daarvoor het Engelse formulier onder "Read more in English". De prijs is hetzelfde. <a href="#english" lang="en">Read more in English</a>.</p></details>
+    <details><summary>Kan het gedicht ook in het Engels?</summary><p>Ja! Handig voor collega's, vrienden of familie die (nog) geen Nederlands spreken. Kijk daarvoor op de <a href="en.html" lang="en">Engelse pagina</a>. De prijs is hetzelfde.</p></details>
     <details><summary>Kan het ook voor een kind?</summary><p>Zeker! Kies "Kind" als leeftijd en "Lief" als toon, dan wordt het gedicht kindvriendelijk.</p></details>
     <details><summary>Wat gebeurt er met mijn gegevens?</summary><p>Je antwoorden worden alleen gebruikt voor jouw gedicht. Na Sinterklaas verwijderen we je antwoorden en het gedicht. Alleen de betaalgegevens bewaren we, omdat dat wettelijk moet. Lees meer in de <a href="#privacy">privacyverklaring</a>.</p></details>
   </section>
@@ -409,7 +391,7 @@
 
 <footer>
   🎁 Rijmpiet · Sinterklaasgedichten op maat<br>
-  Vragen? Mail naar <a href="mailto:nlrijmpiet@gmail.com">nlrijmpiet@gmail.com</a> · <a href="#privacy">Privacy</a>
+  Vragen? Mail naar <a href="mailto:nlrijmpiet@gmail.com">nlrijmpiet@gmail.com</a> · <a href="#privacy">Privacy</a> · <a href="en.html" lang="en">English</a>
 </footer>
 
 <script>

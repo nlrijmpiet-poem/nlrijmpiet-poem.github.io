@@ -128,6 +128,12 @@
     to   { transform: translateX(var(--a)) rotate(var(--r1)); }
   }
   .burst { position: absolute; z-index: 2; pointer-events: none; }
+  /* Spelletje: tik een vallende kruidnoot om hem te vangen */
+  .rain .k.caught { visibility: hidden; }
+  .score { position: absolute; top: 14px; left: 16px; z-index: 2; background: rgba(0,0,0,.18); color: #fff; font-size: .85rem; font-weight: 600; padding: 6px 12px; border-radius: 14px; pointer-events: none; transition: transform .15s; }
+  .score.bump { transform: scale(1.15); }
+  .score.off { display: none; }
+  @media (max-width: 600px) { .score { max-width: calc(100% - 170px); font-size: .8rem; } }
   @media (prefers-reduced-motion: reduce) {
     .rain .k, .rain .k svg { animation: none; }
     .rain .k { top: var(--y); }
@@ -251,6 +257,7 @@
 
 <header class="hero">
   <div class="rain" aria-hidden="true"></div>
+  <div class="score off" role="status" aria-label="Cookies caught"></div>
   <nav class="lang" aria-label="Language"><a href="./" lang="nl">🇳🇱 NL</a><a href="en.html" aria-current="page">🇬🇧 EN</a></nav>
   <div class="wrap">
     <div class="eb eb-banner">🎉 Early bird: <b>25% off</b> until 15 November</div>
@@ -451,24 +458,24 @@
     k.style.setProperty('--d', d.toFixed(2) + 's');
     k.style.setProperty('--delay', (-rnd(0, d)).toFixed(2) + 's');
     k.addEventListener('animationiteration', function (e) {
-      if (e.animationName === 'fall') shuffle(e.currentTarget);
+      if (e.animationName === 'fall') { shuffle(e.currentTarget); e.currentTarget.classList.remove('caught'); }
     });
     rain.appendChild(k);
   }
 
-  if (still) return;
-  hero.addEventListener('click', function (e) {
-    if (e.target.closest('a')) return;
-    var box = hero.getBoundingClientRect();
-    var x0 = e.clientX - box.left, y0 = e.clientY - box.top;
-    for (var i = 0; i < 9; i++) {
+  // Spelletje: tik een vallende kruidnoot om hem te vangen. De teller staat alleen in de pagina en wordt nergens bewaard.
+  var score = hero.querySelector('.score'), caught = 0, bumpT, cheerT;
+  var milestones = { 10: 'Piet is proud! 🎉', 25: 'What a catch! 🙌', 50: 'Cookie champion! 🏆', 100: 'The Saint wants you on his team! 👑' };
+  function burst(x0, y0, n, spread) {
+    if (still) return;
+    for (var i = 0; i < n; i++) {
       var size = Math.round(rnd(14, 28));
       var c = cookie(size);
       c.classList.add('burst');
       c.style.left = (x0 - size / 2) + 'px';
       c.style.top = (y0 - size / 2) + 'px';
       hero.appendChild(c);
-      var vx = rnd(-160, 160), vy = rnd(-320, -140), g = 700, spin = rnd(-720, 720), T = rnd(1.1, 1.6);
+      var vx = rnd(-160, 160) * spread, vy = rnd(-320, -140) * spread, g = 700, spin = rnd(-720, 720), T = rnd(1.1, 1.6);
       var frames = [];
       for (var f = 0; f <= 12; f++) {
         var t = T * f / 12;
@@ -481,6 +488,34 @@
         return function () { el.remove(); };
       })(c);
     }
+  }
+  // Raak je (bijna) een vallende kruidnoot, dan vang je hem; anders strooit Piet een handje.
+  function hit(x, y) {
+    var ks = rain.children;
+    for (var i = 0; i < ks.length; i++) {
+      if (ks[i].classList.contains('caught')) continue;
+      var r = ks[i].getBoundingClientRect(), pad = 16;
+      if (x > r.left - pad && x < r.right + pad && y > r.top - pad && y < r.bottom + pad) return ks[i];
+    }
+    return null;
+  }
+  hero.addEventListener('click', function (e) {
+    if (e.target.closest('a')) return;
+    var box = hero.getBoundingClientRect();
+    var k = hit(e.clientX, e.clientY);
+    if (!k) { burst(e.clientX - box.left, e.clientY - box.top, 9, 1); return; }
+    var r = k.getBoundingClientRect();
+    burst(r.left + r.width / 2 - box.left, r.top + r.height / 2 - box.top, 5, .6);
+    k.classList.add('caught');
+    caught++;
+    score.classList.remove('off');
+    var line = '🍪 ' + caught + (caught === 1 ? ' cookie caught' : ' cookies caught');
+    score.textContent = line + (milestones[caught] ? ' · ' + milestones[caught] : '');
+    clearTimeout(cheerT);
+    if (milestones[caught]) cheerT = setTimeout(function () { score.textContent = line; }, 2500);
+    score.classList.add('bump');
+    clearTimeout(bumpT);
+    bumpT = setTimeout(function () { score.classList.remove('bump'); }, 150);
   });
 })();
 </script>

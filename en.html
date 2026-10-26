@@ -9,6 +9,18 @@
 <meta name="description" content="No inspiration or no time? Rijmpiet writes a funny, personal Saint Nicholas poem in English for your surprise gift. Within 24 hours, from €6.">
 <meta property="og:title" content="Rijmpiet – Saint Nicholas poems to order">
 <meta property="og:description" content="A funny, personal Saint Nicholas poem in English for your surprise gift. Within 24 hours, from €6.">
+<link rel="canonical" href="https://nlrijmpiet.nl/en.html">
+<link rel="alternate" hreflang="nl" href="https://nlrijmpiet.nl/">
+<link rel="alternate" hreflang="en" href="https://nlrijmpiet.nl/en.html">
+<link rel="alternate" hreflang="x-default" href="https://nlrijmpiet.nl/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://nlrijmpiet.nl/en.html">
+<meta property="og:site_name" content="Rijmpiet">
+<meta property="og:locale" content="en_GB">
+<meta property="og:image" content="https://nlrijmpiet.nl/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎁</text></svg>">
 <style>
   /* Lettertypes zitten in de pagina zelf, zodat bezoekers niets naar Google sturen (SIL Open Font License). */
@@ -133,6 +145,9 @@
   .score { position: absolute; top: 14px; left: 16px; z-index: 2; background: rgba(0,0,0,.18); color: #fff; font-size: .85rem; font-weight: 600; padding: 6px 12px; border-radius: 14px; pointer-events: none; transition: transform .15s; }
   .score.bump { transform: scale(1.15); }
   .score.off { display: none; }
+  /* Na afloop een link naar het grote spel; alleen die link is aanklikbaar */
+  .score:has(a) { background: var(--red-dark); box-shadow: 0 4px 14px rgba(0,0,0,.3); }
+  .score a { display: table; margin: 6px auto 0; background: #fff; color: var(--red); text-decoration: none; padding: 3px 12px; border-radius: 999px; pointer-events: auto; }
   @media (max-width: 600px) { .score { max-width: calc(100% - 170px); font-size: .8rem; } }
   @media (prefers-reduced-motion: reduce) {
     .rain .k, .rain .k svg { animation: none; }
@@ -183,6 +198,8 @@
   @media (max-width: 700px) { .examples { grid-template-columns: 1fr; } .ex:nth-child(n) { transform: none; } }
   /* Engelse gedichten voor internationals */
   .en-link { display: inline-block; margin-top: 16px; color: #fff; font-size: .95rem; text-decoration: underline; text-underline-offset: 3px; }
+  /* Link naar het spel Kruitnoten Kaboem!: klein, zodat de bestelknop de baas blijft */
+  .game-link { display: table; margin: 6px auto 0; padding: 4px 8px; color: #fff; font-size: .9rem; opacity: .85; text-decoration: underline; text-underline-offset: 3px; }
   .en { background: var(--paper); border: 1px solid var(--line); border-radius: 20px; padding: 32px 24px; }
   .en .sub { margin-bottom: 24px; }
   .en-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: start; }
@@ -277,6 +294,7 @@
       <li>✔️ From <span class="eb">€4.50</span><span class="full">€6</span></li>
       <li>✔️ One free change</li>
     </ul>
+    <a class="game-link" href="spel.html?lang=en">🎮 Play Kruitnoot Kaboom!</a>
   </div>
 </header>
 
@@ -393,6 +411,7 @@
       <p><b>Tip:</b> please don't share sensitive information, such as about health or religion, unless it really matters for the poem.</p>
       <p><b>Who helps us?</b> A few services process your details for us: Tally (order form), Gmail by Google (email), bunq and PayPal (payment) and Claude by Anthropic (help with writing). Google and Anthropic are based in the United States.</p>
       <p><b>How long do we keep it?</b> After 5 December we delete your answers, your messages and the poem. We keep only your name, the amount and the payment date for 7 years, because Dutch law requires this for the accounts.</p>
+      <p><b>The game</b> Kruitnoot Kaboom! keeps your best score and your sound setting only on your own device, in your browser, and never sends them to Rijmpiet.</p>
       <p><b>Your rights</b> You can always ask which details we have about you, and have them changed or deleted. Just email <a href="mailto:nlrijmpiet@gmail.com">nlrijmpiet@gmail.com</a>. Not happy with how we handle your details? You can file a complaint with the Dutch Data Protection Authority, the Autoriteit Persoonsgegevens.</p>
       <p>Last updated: October 2026</p>
     </details>
@@ -402,7 +421,7 @@
 
 <footer>
   🎁 Rijmpiet · Saint Nicholas poems to order<br>
-  Questions? Email <a href="mailto:nlrijmpiet@gmail.com">nlrijmpiet@gmail.com</a> · <a href="#privacy">Privacy</a> · <a href="./" lang="nl">Nederlands</a>
+  Questions? Email <a href="mailto:nlrijmpiet@gmail.com">nlrijmpiet@gmail.com</a> · <a href="#privacy">Privacy</a> · <a href="./" lang="nl">Nederlands</a> · <a href="spel.html?lang=en">Game</a>
 </footer>
 
 
@@ -466,6 +485,22 @@
   // Spelletje: tik een vallende kruidnoot om hem te vangen. De teller staat alleen in de pagina en wordt nergens bewaard.
   var score = hero.querySelector('.score'), caught = 0, bumpT, cheerT;
   var milestones = { 10: 'Piet is proud! 🎉', 25: 'What a catch! 🙌', 50: 'Cookie champion! 🏆', 100: 'The Saint wants you on his team! 👑' };
+  // Na de eerste vangst loopt er een rondje: drie keer mis tikken en het is afgelopen.
+  var misses = 0, MAX = 3, overT;
+  // Na afloop een link naar het grote spel; die verdwijnt samen met de teller.
+  var big = document.createElement('a');
+  big.href = 'spel.html?lang=en';
+  big.textContent = 'Play the big game →';
+  function text() {
+    var hearts = '';
+    for (var i = 0; i < MAX; i++) hearts += i < MAX - misses ? '❤️' : '🤍';
+    return '🍪 ' + caught + (caught === 1 ? ' cookie caught' : ' cookies caught') + ' · ' + hearts;
+  }
+  function bump() {
+    score.classList.add('bump');
+    clearTimeout(bumpT);
+    bumpT = setTimeout(function () { score.classList.remove('bump'); }, 150);
+  }
   function burst(x0, y0, n, spread) {
     if (still) return;
     for (var i = 0; i < n; i++) {
@@ -503,19 +538,31 @@
     if (e.target.closest('a')) return;
     var box = hero.getBoundingClientRect();
     var k = hit(e.clientX, e.clientY);
-    if (!k) { burst(e.clientX - box.left, e.clientY - box.top, 9, 1); return; }
+    if (!k) {
+      burst(e.clientX - box.left, e.clientY - box.top, 9, 1);
+      if (!caught) return;
+      misses++;
+      clearTimeout(cheerT);
+      if (misses < MAX) { score.textContent = text(); bump(); return; }
+      var n = caught;
+      caught = 0; misses = 0;
+      score.textContent = 'Game over! 🍪 ' + n + ' caught. Again?';
+      score.appendChild(big);
+      bump();
+      overT = setTimeout(function () { if (!caught) score.classList.add('off'); }, 6000);
+      return;
+    }
     var r = k.getBoundingClientRect();
     burst(r.left + r.width / 2 - box.left, r.top + r.height / 2 - box.top, 5, .6);
     k.classList.add('caught');
+    clearTimeout(overT);
     caught++;
     score.classList.remove('off');
-    var line = '🍪 ' + caught + (caught === 1 ? ' cookie caught' : ' cookies caught');
+    var line = text();
     score.textContent = line + (milestones[caught] ? ' · ' + milestones[caught] : '');
     clearTimeout(cheerT);
     if (milestones[caught]) cheerT = setTimeout(function () { score.textContent = line; }, 2500);
-    score.classList.add('bump');
-    clearTimeout(bumpT);
-    bumpT = setTimeout(function () { score.classList.remove('bump'); }, 150);
+    bump();
   });
 })();
 </script>

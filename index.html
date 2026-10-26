@@ -9,6 +9,18 @@
 <meta name="description" content="Geen inspiratie of geen tijd? Rijmpiet schrijft een grappig, persoonlijk Sinterklaasgedicht voor jouw surprise, in het Nederlands of Engels. Binnen 24 uur, vanaf €6.">
 <meta property="og:title" content="Rijmpiet – Sinterklaasgedicht op maat">
 <meta property="og:description" content="Een grappig, persoonlijk gedicht voor jouw surprise. Binnen 24 uur, vanaf €6.">
+<link rel="canonical" href="https://nlrijmpiet.nl/">
+<link rel="alternate" hreflang="nl" href="https://nlrijmpiet.nl/">
+<link rel="alternate" hreflang="en" href="https://nlrijmpiet.nl/en.html">
+<link rel="alternate" hreflang="x-default" href="https://nlrijmpiet.nl/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://nlrijmpiet.nl/">
+<meta property="og:site_name" content="Rijmpiet">
+<meta property="og:locale" content="nl_NL">
+<meta property="og:image" content="https://nlrijmpiet.nl/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎁</text></svg>">
 <style>
   /* Lettertypes zitten in de pagina zelf, zodat bezoekers niets naar Google sturen (SIL Open Font License). */
@@ -133,6 +145,9 @@
   .score { position: absolute; top: 14px; left: 16px; z-index: 2; background: rgba(0,0,0,.18); color: #fff; font-size: .85rem; font-weight: 600; padding: 6px 12px; border-radius: 14px; pointer-events: none; transition: transform .15s; }
   .score.bump { transform: scale(1.15); }
   .score.off { display: none; }
+  /* Na afloop een link naar het grote spel; alleen die link is aanklikbaar */
+  .score:has(a) { background: var(--red-dark); box-shadow: 0 4px 14px rgba(0,0,0,.3); }
+  .score a { display: table; margin: 6px auto 0; background: #fff; color: var(--red); text-decoration: none; padding: 3px 12px; border-radius: 999px; pointer-events: auto; }
   @media (max-width: 600px) { .score { max-width: calc(100% - 170px); font-size: .8rem; } }
   @media (prefers-reduced-motion: reduce) {
     .rain .k, .rain .k svg { animation: none; }
@@ -183,6 +198,8 @@
   @media (max-width: 700px) { .examples { grid-template-columns: 1fr; } .ex:nth-child(n) { transform: none; } }
   /* Engelse gedichten voor internationals */
   .en-link { display: inline-block; margin-top: 16px; color: #fff; font-size: .95rem; text-decoration: underline; text-underline-offset: 3px; }
+  /* Link naar het spel Kruitnoten Kaboem!: klein, zodat de bestelknop de baas blijft */
+  .game-link { display: table; margin: 6px auto 0; padding: 4px 8px; color: #fff; font-size: .9rem; opacity: .85; text-decoration: underline; text-underline-offset: 3px; }
   .en { background: var(--paper); border: 1px solid var(--line); border-radius: 20px; padding: 32px 24px; }
   .en .sub { margin-bottom: 24px; }
   .en-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: start; }
@@ -278,6 +295,7 @@
       <li>✔️ Eén keer gratis aanpassen</li>
     </ul>
     <a class="en-link" href="en.html" lang="en">🇬🇧 Saint Nicholas poems in English →</a>
+    <a class="game-link" href="spel.html">🎮 Speel Kruitnoten Kaboem!</a>
   </div>
 </header>
 
@@ -389,6 +407,7 @@
       <p><b>Tip:</b> deel geen gevoelige informatie, zoals over gezondheid of geloof, tenzij het echt belangrijk is voor het gedicht.</p>
       <p><b>Wie helpt ons?</b> Een paar diensten verwerken je gegevens voor ons: Tally (bestelformulier), Gmail van Google (e-mail), bunq en PayPal (betaling) en Claude van Anthropic (hulp bij het schrijven). Google en Anthropic zitten in de Verenigde Staten.</p>
       <p><b>Hoe lang bewaren we het?</b> Na Sinterklaas verwijderen we je antwoorden, je berichten en het gedicht. Alleen je naam, het bedrag en de datum van betaling bewaren we 7 jaar, omdat de wet dat verplicht voor de boekhouding.</p>
+      <p><b>Het spel</b> Kruitnoten Kaboem! bewaart je beste score en je geluidsinstelling alleen op je eigen apparaat, in je browser, en stuurt die nooit naar Rijmpiet.</p>
       <p><b>Jouw rechten</b> Je mag altijd vragen welke gegevens we van je hebben, en ze laten aanpassen of verwijderen. Stuur dan een mail naar <a href="mailto:nlrijmpiet@gmail.com">nlrijmpiet@gmail.com</a>. Ben je het niet eens met hoe we met je gegevens omgaan? Dan kun je een klacht indienen bij de Autoriteit Persoonsgegevens.</p>
       <p>Laatst bijgewerkt: oktober 2026</p>
     </details>
@@ -398,7 +417,7 @@
 
 <footer>
   🎁 Rijmpiet · Sinterklaasgedichten op maat<br>
-  Vragen? Mail naar <a href="mailto:nlrijmpiet@gmail.com">nlrijmpiet@gmail.com</a> · <a href="#privacy">Privacy</a> · <a href="en.html" lang="en">English</a>
+  Vragen? Mail naar <a href="mailto:nlrijmpiet@gmail.com">nlrijmpiet@gmail.com</a> · <a href="#privacy">Privacy</a> · <a href="en.html" lang="en">English</a> · <a href="spel.html">Spel</a>
 </footer>
 
 <script>
@@ -461,6 +480,22 @@
   // Spelletje: tik een vallende kruidnoot om hem te vangen. De teller staat alleen in de pagina en wordt nergens bewaard.
   var score = hero.querySelector('.score'), caught = 0, bumpT, cheerT;
   var milestones = { 10: 'Piet is trots! 🎉', 25: 'Wat een vangst! 🙌', 50: 'Pepernotenkampioen! 🏆', 100: 'Sint wil jou in het team! 👑' };
+  // Na de eerste vangst loopt er een rondje: drie keer mis tikken en het is afgelopen.
+  var misses = 0, MAX = 3, overT;
+  // Na afloop een link naar het grote spel; die verdwijnt samen met de teller.
+  var big = document.createElement('a');
+  big.href = 'spel.html';
+  big.textContent = 'Speel het grote spel →';
+  function text() {
+    var hearts = '';
+    for (var i = 0; i < MAX; i++) hearts += i < MAX - misses ? '❤️' : '🤍';
+    return '🍪 ' + caught + (caught === 1 ? ' kruidnoot gevangen' : ' kruidnoten gevangen') + ' · ' + hearts;
+  }
+  function bump() {
+    score.classList.add('bump');
+    clearTimeout(bumpT);
+    bumpT = setTimeout(function () { score.classList.remove('bump'); }, 150);
+  }
   function burst(x0, y0, n, spread) {
     if (still) return;
     for (var i = 0; i < n; i++) {
@@ -498,19 +533,31 @@
     if (e.target.closest('a')) return;
     var box = hero.getBoundingClientRect();
     var k = hit(e.clientX, e.clientY);
-    if (!k) { burst(e.clientX - box.left, e.clientY - box.top, 9, 1); return; }
+    if (!k) {
+      burst(e.clientX - box.left, e.clientY - box.top, 9, 1);
+      if (!caught) return;
+      misses++;
+      clearTimeout(cheerT);
+      if (misses < MAX) { score.textContent = text(); bump(); return; }
+      var n = caught;
+      caught = 0; misses = 0;
+      score.textContent = 'Afgelopen! 🍪 ' + n + ' gevangen. Nog een keer?';
+      score.appendChild(big);
+      bump();
+      overT = setTimeout(function () { if (!caught) score.classList.add('off'); }, 6000);
+      return;
+    }
     var r = k.getBoundingClientRect();
     burst(r.left + r.width / 2 - box.left, r.top + r.height / 2 - box.top, 5, .6);
     k.classList.add('caught');
+    clearTimeout(overT);
     caught++;
     score.classList.remove('off');
-    var line = '🍪 ' + caught + (caught === 1 ? ' kruidnoot gevangen' : ' kruidnoten gevangen');
+    var line = text();
     score.textContent = line + (milestones[caught] ? ' · ' + milestones[caught] : '');
     clearTimeout(cheerT);
     if (milestones[caught]) cheerT = setTimeout(function () { score.textContent = line; }, 2500);
-    score.classList.add('bump');
-    clearTimeout(bumpT);
-    bumpT = setTimeout(function () { score.classList.remove('bump'); }, 150);
+    bump();
   });
 })();
 </script>

@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; font-src data:; img-src 'self' data:; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; font-src data:; img-src 'self' data:; connect-src https://script.google.com/macros/s/AKfycbzmBTKu5w2tWa74mPQpUfv2X8-z8GH5-yLfdu_koiu9M4h-I8GbGvQXqzafYS7RZxt8xg/exec https://script.googleusercontent.com/macros/echo; base-uri 'none'; form-action 'none'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="theme-color" content="#7d1422">
 <title>Kruitnoten Kaboem! – Rijmpiet</title>
@@ -1036,7 +1036,7 @@ let FX = true; // false during headless replays: no effects, no sound, no DOM
 function godMode() { return GOD_OK && !!window.__god; }
 
 // ── the leaderboard (section 12b). Plak hier de web-app-URL (eindigt op /exec). Leeg = geen ranglijst.
-const LB_URL_PROD = '';
+const LB_URL_PROD = 'https://script.google.com/macros/s/AKfycbzmBTKu5w2tWa74mPQpUfv2X8-z8GH5-yLfdu_koiu9M4h-I8GbGvQXqzafYS7RZxt8xg/exec';
 // ?debug on a local copy only (tests): ?lb=mock (the Apps Script mock behind Playwright) or ?lb=<another /exec URL>
 const LB_RE = /^https:\/\/script\.google\.com\/macros\/s\/[\w-]{4,}\/exec$/;
 const LB_TEST = GOD_OK && QS.has('lb');

@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; font-src data:; img-src 'self' data:; connect-src https://script.google.com/macros/s/AKfycbzmBTKu5w2tWa74mPQpUfv2X8-z8GH5-yLfdu_koiu9M4h-I8GbGvQXqzafYS7RZxt8xg/exec https://script.googleusercontent.com/macros/echo; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'unsafe-inline' https://gc.zgo.at; style-src 'self' 'unsafe-inline'; font-src data:; img-src 'self' data: https://nlrijmpiet.goatcounter.com; connect-src https://nlrijmpiet.goatcounter.com https://script.google.com/macros/s/AKfycbzmBTKu5w2tWa74mPQpUfv2X8-z8GH5-yLfdu_koiu9M4h-I8GbGvQXqzafYS7RZxt8xg/exec https://script.googleusercontent.com/macros/echo; base-uri 'none'; form-action 'none'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="theme-color" content="#7d1422">
 <title>Kruitnoten Kaboem! – Rijmpiet</title>
@@ -5831,5 +5831,6 @@ async function selfTest() {
 if (QS.has('selftest')) setTimeout(() => { selfTest().catch(() => { try { $('tSelf').textContent = t('stNoNet'); } catch (e) { /* nothing */ } }); }, 400);
 })();
 </script>
+<script data-goatcounter="https://nlrijmpiet.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 </body>
 </html>

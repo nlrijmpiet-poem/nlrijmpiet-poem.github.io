@@ -1042,7 +1042,7 @@ const LB_RE = /^https:\/\/script\.google\.com\/macros\/s\/[\w-]{4,}\/exec$/;
 const LB_TEST = GOD_OK && QS.has('lb');
 const LB_URL = LB_TEST ? (QS.get('lb') === 'mock' ? 'https://script.google.com/macros/s/MOCK/exec' : LB_RE.test(QS.get('lb')) ? QS.get('lb') : '')
   : LB_RE.test(LB_URL_PROD) ? LB_URL_PROD : '';
-const SIM_ID = 'spel-1.6+eabb9f573be9', BUILT = '2026-10-26T06:00:00Z';
+const SIM_ID = 'spel-1.7+37f8ed262efa', BUILT = '2026-10-28T13:00:00Z';
 // season dates before any server reply (the server's dates win once it answers)
 const LB_SEASON = { id: '2026', closes: '2026-12-05T23:59:59+01:00', wipe: '2026-12-27' };
 
@@ -1277,7 +1277,7 @@ function codeNorm(s) {
 // The SIM block: everything that decides a score. build.sh copies it verbatim into the leaderboard server (Code.gs),
 // so it may only use exact arithmetic and must not touch the page (no t(), fmt(), document, window, Date …).
 // Free names: FX, godMode and the fx* hooks (the server stubs them).
-const SIM_VERSION = 'spel-1.6';
+const SIM_VERSION = 'spel-1.7';
 // ───────────────────────── 1. CONFIG (all tuning lives here) ─────────────────────────
 const CONFIG = {
   arena: { w: 360, h: 640, roofY: 560, topPad: 40 },   // topPad: spawn band kept clear of the HUD
@@ -2238,9 +2238,11 @@ function applyTap(x, y) {
   if (nearExit(hx, hy)) return;
   // A miss is settled CONFIG.preHitGraceMs later (resolveMisses): a hit in between forgives it. Whether it would cost
   // a heart is decided now; a penalised one takes the miss cooldown now, so two quick misses never cost two hearts.
-  const vd = missVerdict(hx, hy), pen = vd === MISS_PEN;
-  if (pen) S.lastPenalTick = S.tick;
-  S.pendMiss.push([S.tick, hx, hy, pen, S.tick < CONFIG.missGraceStart * HZ, vd === MISS_WARN]);
+  // 1.7: a warning takes the cooldown too (a bounce on empty sky is one miss, not a warning plus a heart), and the strike
+  // it replaced is kept, so a miss the other thumb forgives does not arm the two-strike rule
+  const was = S.lastStrike, vd = missVerdict(hx, hy), pen = vd === MISS_PEN;
+  if (pen || vd === MISS_WARN) S.lastPenalTick = S.tick;
+  S.pendMiss.push([S.tick, hx, hy, pen, S.tick < CONFIG.missGraceStart * HZ, vd === MISS_WARN, was]);
   fxMissPuff(hx, hy);
 }
 function resolveMisses() {
@@ -2249,6 +2251,7 @@ function resolveMisses() {
     const m = a.shift();
     const alone = S.lastHitTick < m[0];            // a hit since the tap (the other thumb): forgiven
     const pen = m[3] && alone;
+    if (!alone && S.lastStrike === m[0]) S.lastStrike = m[6];
     Score.tap('miss');
     Score.miss(pen);
     fxMissText(m[1], m[2], pen, !pen && m[4], m[5] && alone);

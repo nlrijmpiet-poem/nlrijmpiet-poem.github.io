@@ -220,8 +220,8 @@
   @media (max-width: 600px) { .hero { padding-top: 66px; } }
 </style>
 <script>
-  // Na 15 november (Nederlandse tijd) automatisch terug naar de gewone prijzen.
-  if (Date.now() >= Date.parse('2026-11-16T00:00:00+01:00')) document.documentElement.classList.add('eb-over');
+  // Black Friday-week 23 t/m 29 november (Nederlandse tijd); daarbuiten de gewone prijzen.
+  var _n = Date.now(); if (_n < Date.parse('2026-11-23T00:00:00+01:00') || _n >= Date.parse('2026-11-30T00:00:00+01:00')) document.documentElement.classList.add('eb-over');
 </script>
 </head>
 <body>
@@ -278,7 +278,7 @@
   <div class="score off" role="status" aria-label="Kruidnoten gevangen"></div>
   <nav class="lang" aria-label="Taal"><a href="./" aria-current="page">🇳🇱 NL</a><a href="en.html" lang="en">🇬🇧 EN</a></nav>
   <div class="wrap">
-    <div class="eb eb-banner">🎉 Vroege Piet: <b>25% korting</b> t/m 15 november</div>
+    <div class="eb eb-banner">🎉 Black Friday-week: <b>50% korting op alles</b> t/m 29 november</div>
     <div class="brand">🎁 Rijm<span>piet</span></div>
     <div class="props" aria-hidden="true">
       <span><svg><use href="#i-mijter"/></svg></span>
@@ -292,7 +292,7 @@
     <a class="btn" href="https://nlrijmpiet.nl/bestel">Bestel je gedicht →</a>
     <ul class="ticks">
       <li>✔️ Binnen 30 minuten</li>
-      <li>✔️ Vanaf <span class="eb">€4,50</span><span class="full">€6</span></li>
+      <li>✔️ Vanaf <span class="eb">€3</span><span class="full">€6</span></li>
       <li>✔️ Eén keer gratis aanpassen</li>
     </ul>
     <a class="en-link" href="en.html" lang="en">🇬🇧 Saint Nicholas poems in English →</a>
@@ -331,11 +331,11 @@
 
   <section>
     <h2>Prijzen</h2>
-    <p class="sub">Geen verrassingen, behalve in de surprise.<span class="eb"><br><b>Vroege Piet: 25% korting op alles én een gratis printversie als je bestelt t/m 15 november.</b></span></p>
+    <p class="sub">Geen verrassingen, behalve in de surprise.<span class="eb"><br><b>Black Friday-week: 50% korting op alles én een gratis printversie, t/m zondag 29 november.</b></span></p>
     <div class="prices">
-      <a class="price" href="https://nlrijmpiet.nl/bestel"><h3>Kort</h3><div class="amt"><span class="eb"><s>€6</s> €4,50</span><span class="full">€6</span></div><p>±16 regels<br>Perfect voor een klein cadeau</p><span class="go">Bestellen →</span></a>
-      <a class="price hl" href="https://nlrijmpiet.nl/bestel"><h3>Lang</h3><div class="amt"><span class="eb"><s>€9</s> €6,75</span><span class="full">€9</span></div><p>30+ regels<br>Voor een echte surprise</p><span class="go">Bestellen →</span></a>
-      <a class="price" href="https://nlrijmpiet.nl/bestel"><h3>Printversie</h3><div class="amt"><span class="eb"><s>+€1</s> Gratis</span><span class="full">+€1</span></div><p>Mooie PDF om te printen en op je surprise te plakken<br><span class="eb">Gratis t/m 15 november</span><span class="full">+€1,50 bij een lang gedicht</span></p><span class="go">Bestellen →</span></a>
+      <a class="price" href="https://nlrijmpiet.nl/bestel"><h3>Kort</h3><div class="amt"><span class="eb"><s>€6</s> €3</span><span class="full">€6</span></div><p>±16 regels<br>Perfect voor een klein cadeau</p><span class="go">Bestellen →</span></a>
+      <a class="price hl" href="https://nlrijmpiet.nl/bestel"><h3>Lang</h3><div class="amt"><span class="eb"><s>€9</s> €4,50</span><span class="full">€9</span></div><p>30+ regels<br>Voor een echte surprise</p><span class="go">Bestellen →</span></a>
+      <a class="price" href="https://nlrijmpiet.nl/bestel"><h3>Printversie</h3><div class="amt"><span class="eb"><s>+€1</s> Gratis</span><span class="full">+€1</span></div><p>Mooie PDF om te printen en op je surprise te plakken<br><span class="eb">Gratis t/m 29 november</span><span class="full">+€1,50 bij een lang gedicht</span></p><span class="go">Bestellen →</span></a>
     </div>
     <a class="bundle" href="https://nlrijmpiet.nl/bestel">
       <div class="bundle-head">
@@ -344,8 +344,8 @@
         <p>Lootjes getrokken met familie, vrienden of collega's? Bestel vijf gedichten in één keer.</p>
       </div>
       <div class="bundle-opts">
-        <div><b>5 × Kort</b><span class="amt"><span class="eb"><s>€25</s> €18,75</span><span class="full"><s>€30</s> €25</span></span><small><span class="eb">€3,75</span><span class="full">€5</span> per gedicht, printversies inbegrepen</small></div>
-        <div><b>5 × Lang</b><span class="amt"><span class="eb"><s>€37,50</s> €27,50</span><span class="full"><s>€45</s> €37,50</span></span><small><span class="eb">€5,50</span><span class="full">€7,50</span> per gedicht, printversies inbegrepen</small></div>
+        <div><b>5 × Kort</b><span class="amt"><span class="eb"><s>€25</s> €12,50</span><span class="full"><s>€30</s> €25</span></span><small><span class="eb">€2,50</span><span class="full">€5</span> per gedicht, printversies inbegrepen</small></div>
+        <div><b>5 × Lang</b><span class="amt"><span class="eb"><s>€37,50</s> €18,75</span><span class="full"><s>€45</s> €37,50</span></span><small><span class="eb">€3,75</span><span class="full">€7,50</span> per gedicht, printversies inbegrepen</small></div>
       </div>
       <span class="go">Bestel je Lootjespakket →</span>
     </a>
@@ -376,13 +376,13 @@
         <p class="lines"><span>Dennis, de Sint heeft gekeken op kantoor,</span><span>en wat blijkt: bij de koffieautomaat sta jij altijd voor!</span><span>Je mail is "even kijken", je deadline "bijna klaar",</span><span>maar bij de taart voor een jarige ben jij als eerste daar.</span><span>Je zegt elke maandag: "Nu ga ik écht aan de slag!"</span><span>en vrijdag om drie uur zwaai je al: "Fijne dag!"</span><span>Dus pak maar uit, en Dennis, doe niet zo raar:</span><span>dit is voor op je bureau, dan staat er tenminste iets klaar!</span></p>
       </article>
     </div>
-    <p class="ex-note">📄 Wil je het gedicht ook als mooie printversie (PDF), klaar om op je surprise te plakken? <span class="eb">Bestel je t/m 15 november, dan krijg je die gratis.</span><span class="full">Dat kost €1 extra (lang gedicht €1,50).</span></p>
+    <p class="ex-note">📄 Wil je het gedicht ook als mooie printversie (PDF), klaar om op je surprise te plakken? <span class="eb">Bestel je t/m 29 november, dan krijg je die gratis.</span><span class="full">Dat kost €1 extra (lang gedicht €1,50).</span></p>
   </section>
 
   <section>
     <h2>Veelgestelde vragen</h2>
-    <details class="eb"><summary>Hoe werkt de Vroege Piet-korting?</summary><p>Bestel je gedicht uiterlijk 15 november en je krijgt 25% korting op elk los gedicht én op het Lootjespakket, plus de printversie gratis. Je kiest zelf wanneer je het gedicht wilt ontvangen, dus het mag ook pas eind november.</p></details>
-    <details><summary>Hoe bestel ik een Lootjespakket?</summary><p>Vul het formulier in voor elke persoon en kies bij "Bestelling" voor Lootjespakket. Gebruik bij alle vijf dezelfde naam. Na elk formulier betaal je een vijfde van de pakketprijs (<span class="eb">t/m 15 november €3,75 kort, €5,50 lang</span><span class="full">€5 kort, €7,50 lang</span>).</p></details>
+    <details class="eb"><summary>Hoe werkt de Black Friday-korting?</summary><p>Bestel je gedicht uiterlijk zondag 29 november en je krijgt 50% korting op elk los gedicht én op het Lootjespakket, plus de printversie gratis. Je kiest zelf wanneer je het gedicht wilt ontvangen, dus het mag ook pas eind november.</p></details>
+    <details><summary>Hoe bestel ik een Lootjespakket?</summary><p>Vul het formulier in voor elke persoon en kies bij "Bestelling" voor Lootjespakket. Gebruik bij alle vijf dezelfde naam. Na elk formulier betaal je een vijfde van de pakketprijs (<span class="eb">t/m 29 november €2,50 kort, €3,75 lang</span><span class="full">€5 kort, €7,50 lang</span>).</p></details>
     <details><summary>Hoe snel krijg ik mijn gedicht?</summary><p>Binnen 30 minuten na je bestelling, dag en nacht.</p></details>
     <details><summary>Wat als ik het gedicht niet leuk vind?</summary><p>Je mag één keer gratis een aanpassing vragen. Zeg gewoon wat er anders moet.</p></details>
     <details><summary>Hoeveel moet ik vertellen?</summary><p>Hoe meer details, hoe leuker het gedicht. Denk aan hobby's, werk, gewoontes en grappige momenten van dit jaar.</p></details>
